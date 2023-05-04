@@ -1,0 +1,5 @@
+motions:
+  - file: "RL_Avatar_RunForward_Motion.npy"
+    weight: 0.1
+  - file: "RL_Avatar_Idle_Battle_Motion.npy"
+    weight: 0.1

@@ -1,0 +1,21 @@
+motions:
+  - file: "RL_Avatar_RunForward_Motion.npy"
+    weight: 0.1
+  - file: "RL_Avatar_WalkForward01_Motion.npy"
+    weight: 0.1
+  - file: "RL_Avatar_WalkForward02_Motion.npy"
+    weight: 0.1
+  - file: "RL_Avatar_Atk_Kick_Motion.npy"
+    weight: 0
+  - file: "RL_Avatar_Atk_SlashLeft_Motion.npy"
+    weight: 0
+  - file: "RL_Avatar_Atk_ShieldSwipe01_Motion.npy"
+    weight: 0
+  - file: "RL_Avatar_Atk_ShieldCharge_Motion.npy"
+    weight: 0
+  - file: "RL_Avatar_Idle_Ready_Motion.npy"
+    weight: 0
+  - file: "RL_Avatar_Taunt_Roar_Motion.npy"
+    weight: 0
+  - file: "RL_Avatar_Idle_Battle_Motion.npy"
+    weight: 0
