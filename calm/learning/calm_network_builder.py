@@ -254,8 +254,7 @@ class CALMBuilder(amp_network_builder.AMPBuilder):
             return actor_out_size, critic_out_size
 
         def eval_enc(self, amp_obs):
-            if self._enc_arch_type == 'mlp':
-                amp_obs = amp_obs.view(amp_obs.shape[0], -1)
+            amp_obs = amp_obs.view(amp_obs.shape[0], -1)
             enc_output = self.encode(amp_obs)
             enc_output = torch.nn.functional.normalize(enc_output, dim=-1)
             return enc_output
