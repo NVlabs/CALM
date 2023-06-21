@@ -46,7 +46,7 @@ class HumanoidHeadingConditioned(HumanoidHeading):
                          device_id=device_id,
                          headless=headless)
 
-        self._tar_height = torch.zeros([self.num_envs], device=self.device, dtype=torch.long)
+        self._tar_locomotion_index = torch.zeros([self.num_envs], device=self.device, dtype=torch.long)
         self._corresponding_speeds = torch.tensor([6, 3.5, 3.5], device=self.device, dtype=torch.float32)
 
         return
@@ -61,13 +61,13 @@ class HumanoidHeadingConditioned(HumanoidHeading):
         if env_ids is None:
             root_states = self._humanoid_root_states
             tar_dir = self._tar_dir
-            tar_height = self._tar_height
+            tar_locomotion_index = self._tar_locomotion_index
         else:
             root_states = self._humanoid_root_states[env_ids]
             tar_dir = self._tar_dir[env_ids]
-            tar_height = self._tar_height[env_ids]
+            tar_locomotion_index = self._tar_locomotion_index[env_ids]
 
-        obs = compute_heading_observations(root_states, tar_dir, tar_height)
+        obs = compute_heading_observations(root_states, tar_dir, tar_locomotion_index)
         return obs
 
     def _compute_reward(self, actions):
@@ -88,13 +88,13 @@ class HumanoidHeadingConditioned(HumanoidHeading):
 
             tar_dir = torch.stack([torch.cos(rand_theta), torch.sin(rand_theta)], dim=-1)
 
-            tar_height = torch.randint(low=0, high=3, size=(n,), device=self.device, dtype=torch.int64)
+            tar_locomotion_index = torch.randint(low=0, high=3, size=(n,), device=self.device, dtype=torch.int64)
 
             self._tar_dir[env_ids] = tar_dir
             self._tar_facing_dir[env_ids] = tar_dir
             self._heading_change_steps[env_ids] = self.progress_buf[env_ids] + change_steps
-            self._tar_height[env_ids] = tar_height
-            self._tar_speed[env_ids] = self._corresponding_speeds[tar_height]
+            self._tar_locomotion_index[env_ids] = tar_locomotion_index
+            self._tar_speed[env_ids] = self._corresponding_speeds[tar_locomotion_index]
 
         return
 
@@ -103,7 +103,7 @@ class HumanoidHeadingConditioned(HumanoidHeading):
 
 
 @torch.jit.script
-def compute_heading_observations(root_states, tar_dir, tar_height):
+def compute_heading_observations(root_states, tar_dir, tar_locomotion_index):
     # type: (Tensor, Tensor, Tensor) -> Tensor
     root_rot = root_states[:, 3:7]
 
@@ -113,7 +113,7 @@ def compute_heading_observations(root_states, tar_dir, tar_height):
     local_tar_dir = quat_rotate(heading_rot, tar_dir3d)
     local_tar_dir = local_tar_dir[..., 0:2]
 
-    obs = torch.cat([local_tar_dir, tar_height.view(-1, 1)], dim=-1)
+    obs = torch.cat([local_tar_dir, tar_locomotion_index.view(-1, 1)], dim=-1)
     return obs
 
 
