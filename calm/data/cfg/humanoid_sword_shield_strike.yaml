@@ -24,7 +24,7 @@ env:
   enableTaskObs: True
   
   asset:
-    assetRoot: "ase/data/assets"
+    assetRoot: "calm/data/assets"
     assetFileName: "mjcf/amp_humanoid_sword_shield.xml"
 
   plane:
