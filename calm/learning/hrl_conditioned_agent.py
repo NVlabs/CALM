@@ -58,7 +58,7 @@ class HRLConditionedAgent(HRLAgent):
         return all_encoded_demo_amp_obs
 
     def _calc_style_reward(self, action):
-        requested_heights = self.vec_env.env.task.tar_locomotion_index.view(-1)
+        requested_heights = self.vec_env.env.task._tar_locomotion_index.view(-1)
         style_reward = torch.zeros((action.shape[0]), device=self.ppo_device, dtype=torch.float32)
         z = torch.nn.functional.normalize(action, dim=-1)
 
@@ -69,7 +69,7 @@ class HRLConditionedAgent(HRLAgent):
         return style_reward.unsqueeze(-1)
 
     def _calc_disc_reward(self, amp_obs):
-        requested_motion_indices = self.vec_env.env.task.tar_locomotion_index.view(-1)
+        requested_motion_indices = self.vec_env.env.task._tar_locomotion_index.view(-1)
 
         disc_reward = torch.zeros((amp_obs.shape[0], 1), device=self.ppo_device, dtype=torch.float32)
 

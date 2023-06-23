@@ -62,7 +62,7 @@ python calm/run.py --test --task HumanoidHeadingConditioned --num_envs 16 --cfg_
 The CALM low-level controller and the high-level locomotion controller can be combined to solve tasks without further trianing.
 This phase is inference only.
 ```
-python calm/run.py --task HumanoidStrikeFSM --cfg_env calm/data/cfg/humanoid_sword_shield_strike_fsm.yaml --cfg_train calm/data/cfg/train/rlg/hrl_humanoid_fsm.yaml --motion_file calm/data/motions/reallusion_sword_shield/dataset_reallusion_sword_shield_fsm_movements.yaml --llc_checkpoint [path_to_llc_checkpoint] --checkpoint [path_to_hlc_checkpoint]
+python calm/run.py --test --task HumanoidStrikeFSM --num_envs 16 --cfg_env calm/data/cfg/humanoid_sword_shield_strike_fsm.yaml --cfg_train calm/data/cfg/train/rlg/hrl_humanoid_fsm.yaml --motion_file calm/data/motions/reallusion_sword_shield/dataset_reallusion_sword_shield_fsm_movements.yaml --llc_checkpoint [path_to_llc_checkpoint] --checkpoint [path_to_hlc_checkpoint]
 ```
 `--llc_checkpoint` specifies the checkpoint to use for the low-level controller. A pre-trained CALM low-level
 controller is available in `calm/data/models/calm_llc_reallusion_sword_shield.pth`.
@@ -98,7 +98,7 @@ HumanoidStrike: calm/data/cfg/humanoid_sword_shield_strike.yaml
 ```
 To test a trained model, use the following command:
 ```
-python calm/run.py --test --task HumanoidHeading --num_envs 16 --cfg_env calm/data/cfg/humanoid_sword_shield_heading.yaml --cfg_train calm/data/cfg/train/rlg/hrl_humanoid.yaml --motion_file calm/data/motions/reallusion_sword_shield/RL_Avatar_Crouch_Idle_Motion.npy --llc_checkpoint [path_to_llc_checkpoint] --checkpoint [path_to_hlc_checkpoint]
+python calm/run.py --test --task HumanoidHeading --num_envs 16 --cfg_env calm/data/cfg/humanoid_sword_shield_heading.yaml --cfg_train calm/data/cfg/train/rlg/hrl_humanoid.yaml --motion_file calm/data/motions/reallusion_sword_shield/RL_Avatar_Idle_Ready_Motion.npy --llc_checkpoint [path_to_llc_checkpoint] --checkpoint [path_to_hlc_checkpoint]
 ```
 
 &nbsp;
