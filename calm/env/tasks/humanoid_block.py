@@ -70,7 +70,7 @@ class HumanoidBlock(humanoid_amp_task.HumanoidAMPTask):
         return
 
     def _load_proj_asset(self):
-        asset_root = "ase/data/assets/mjcf/"
+        asset_root = "calm/data/assets/mjcf/"
         asset_file = "block_projectile.urdf"
 
         asset_options = gymapi.AssetOptions()
