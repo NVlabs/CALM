@@ -1,7 +1,7 @@
 # Conditional Adversarial Latent Models
 
 Code accompanying the paper:
-"CALM: Conditional Adversarial Latent Models for Directable Virtual Characters" \
+"[CALM: Conditional Adversarial Latent Models for Directable Virtual Characters](https://research.nvidia.com/labs/par/calm/)" \
 ![Skills](images/calm_teaser.jpg)
 
 
